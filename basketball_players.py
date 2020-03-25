@@ -9,18 +9,6 @@ pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 
-stats_df = pd.read_csv('player_locations_and_stat_totals.csv')
-stats_df['birthplace_country'] = stats_df['birthplace_country'].str.strip()
-
-country_codes_df = pd.read_csv('country_codes.csv', index_col=0)
-
-stats_df = stats_df.merge(country_codes_df, how='left', left_on='birthplace_country', right_on='code_3digit')
-
-# Instantiate Geopy Nominatim
-geolocator = OpenMapQuest(api_key='XqxsOEvVxEWTifxzkzeh1rWC9sJMZg0x')
-geocode = RateLimiter(geolocator.geocode, min_delay_seconds=.4)
-
-#print(geocode('Hightstown, NJ, United States of America'))
 
 def calculate_per(row):
     '''Calculate the Player Efficiency Rating of a player based on the input data. The formula was taken from
@@ -49,33 +37,46 @@ def get_distance_between(row):
     :return: An Integer representing the distance in miles
     '''
 
-    print(row.school_city)
     # Get latitude and longitude of the player's school
     school_geo = geocode(row.school_city)
     school_lat = school_geo.latitude
     school_long = school_geo.longitude
-    print(school_lat)
 
-    # Get the latitude and longitude of the player's hometown
-    if type(row.birthplace_state) == float and np.isnan(row.birthplace_state):
-        print(str(row.birthplace_city + ", " + row.Country_name))
-        birth_geo = geocode(str(row.birthplace_city + ", " + row.Country_name))
-    else:
-        print(str(row.birthplace_city + ", " + row.birthplace_state + ", " + row.Country_name))
-        birth_geo = geocode(str(row.birthplace_city + ", " + row.birthplace_state + ", " + row.Country_name))
-    birth_lat = birth_geo.latitude
-    birth_long = birth_geo.longitude
-    print(birth_lat)
+    try:
 
-    # Calculate the distance in miles between the two coordinates
-    distance_num = distance((school_lat, school_long), (birth_lat, birth_long)).miles
+        # Get the latitude and longitude of the player's hometown
+        if type(row.birthplace_state) == float and np.isnan(row.birthplace_state):
+            birth_geo = geocode(str(row.birthplace_city + ", " + row.Country_name))
+        else:
+            birth_geo = geocode(str(row.birthplace_city + ", " + row.birthplace_state + ", " + row.Country_name))
 
-    print()
+        birth_lat = birth_geo.latitude
+        birth_long = birth_geo.longitude
 
-    return distance_num
+        # Calculate the distance in miles between the two coordinates
+        distance_num = distance((school_lat, school_long), (birth_lat, birth_long)).miles
+
+        return distance_num
+
+    except:
+        print("There was an error with the following city: {},  player: {} {}".format(row.birthplace_city, row.first_name, row.last_name))
+        pass
 
 
 if __name__ == '__main__':
+
+    stats_df = pd.read_csv('player_locations_and_stat_totals.csv')
+    stats_df['birthplace_country'] = stats_df['birthplace_country'].str.strip()
+
+    country_codes_df = pd.read_csv('country_codes.csv', index_col=0)
+
+    stats_df = stats_df.merge(country_codes_df, how='left', left_on='birthplace_country', right_on='code_3digit')
+
+    # Instantiate Geopy Nominatim
+    geolocator = OpenMapQuest(api_key='XqxsOEvVxEWTifxzkzeh1rWC9sJMZg0x')
+    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=.4)
+
+    # print(geocode('Hightstown, NJ, United States of America'))
 
     stats_df['PER'] = stats_df.apply(calculate_per, axis=1)
 
@@ -84,6 +85,6 @@ if __name__ == '__main__':
 
     stats_df = stats_df.sort_values(by='PER', ascending=False).reset_index(drop=True)
 
-    stats_df.to_csv('output.csv')
+    stats_df.to_csv('output_showing_miles_between.csv')
 
     print(stats_df.head(100))
