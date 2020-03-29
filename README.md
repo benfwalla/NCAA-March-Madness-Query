@@ -286,7 +286,7 @@ I also used `pandarralel`, a pandas multi-threading library, to make the process
 between all 1710 players' birthplaces and college towns in about 10 minutes and placed the results in a new column 
 called `miles_between_school_and_home`.
 
-The output of my Python script, and the final version of my csv output, is [output_showing_miles_between.csv](output_showing_miles_between.csv).
+The output of my Python script, and the final version of my csv output, is [output_showing_miles_between.csv](data/output_showing_miles_between.csv).
 
 ### Step 4. Data Visualization
 
@@ -310,7 +310,7 @@ and even run the query in [Google's BigQuery Console](https://console.cloud.goog
 
 ### [Kaggle - Country Codes](https://www.kaggle.com/koki25ando/country-code)
 Google's country data was structured as 3-digit codes (USA, CAN, MEX, etc.), but the Python GeoPy API requires fully-spelled
-country names to find the longitude and latitude of an address. I downloaded [the csv file](country_codes.csv) of country codes from this
+country names to find the longitude and latitude of an address. I downloaded [the csv file](data/country_codes.csv) of country codes from this
 page and joined it with my Google query output. You can see how I performed the join in [my python code](basketball_players.py).
 
 ### [GeoPy Documentation](https://geopy.readthedocs.io/en/stable/)

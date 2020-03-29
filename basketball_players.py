@@ -65,10 +65,10 @@ def get_distance_between(row):
 
 if __name__ == '__main__':
 
-    stats_df = pd.read_csv('player_locations_and_stat_totals.csv')
+    stats_df = pd.read_csv('data/player_locations_and_stat_totals.csv')
     stats_df['birthplace_country'] = stats_df['birthplace_country'].str.strip()
 
-    country_codes_df = pd.read_csv('country_codes.csv', index_col=0)
+    country_codes_df = pd.read_csv('data/country_codes.csv', index_col=0)
 
     stats_df = stats_df.merge(country_codes_df, how='left', left_on='birthplace_country', right_on='code_3digit')
 
@@ -85,6 +85,6 @@ if __name__ == '__main__':
 
     stats_df = stats_df.sort_values(by='PER', ascending=False).reset_index(drop=True)
 
-    stats_df.to_csv('output_showing_miles_between.csv')
+    stats_df.to_csv('data/output_showing_miles_between.csv')
 
     print(stats_df.head(100))
