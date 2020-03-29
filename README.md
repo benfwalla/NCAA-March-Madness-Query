@@ -2,7 +2,7 @@
 
 ## TL;DR
 - I used [Google’s NCAA Basketball Database](https://console.cloud.google.com/marketplace/details/ncaa-bb-public/ncaa-basketball)
-to answer a seemingly simple question: *who are the best players from each country?*
+to answer a seemingly simple question: *who are the best players from each country in the 2017 season?*
 - With the help of SQL and Python, I queried and calculated insights from the database
 - I created [this Dashboard in Google Data Studio](https://datastudio.google.com/s/jAmFXmtW6nc) to visualize my work!
 
