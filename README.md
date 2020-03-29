@@ -18,7 +18,7 @@ questions that the dataset could potentially answer. This README and the files i
 of my three queries. My journey of the other two queries can be found in 
 [this Google Doc](https://docs.google.com/document/d/1D3NWAudYCWrx6CygabLhWDLkDr8QTxNTDdTVEqBEY0s/edit?usp=sharing). 
 
-## Question: *Who are the best players from each country?*
+## Question: *Who are the best players from each country in the 2017 season?*
 
 ### Step 1: Plan
 The first thing I do when I'm asked to write a query is evaluate exactly what is being asked. So, let's analyze this 
