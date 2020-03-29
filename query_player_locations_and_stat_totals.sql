@@ -51,6 +51,6 @@ JOIN
 WHERE birth_place != "" AND season = 2017
 GROUP BY t.conf_name, t.market, school_city, first_name, p.last_name,
          p.birthplace_city, p.birthplace_state, p.birthplace_country,
-         birth_place, g.team_games_played_2017
+         g.team_games_played_2017
 HAVING attendance >= .75 AND avg_mins_per_game >= 20
 ORDER BY first_name, last_name

@@ -83,7 +83,7 @@ SELECT p.team_id,
        SUM(minutes_int64) as Minutes,
 FROM `bigquery-public-data.ncaa_basketball.mbb_players_games_sr` p
 WHERE birth_place != "" AND season = 2017
-GROUP BY p.team_id, p.first_name, p.last_name, p.birthplace_city, p.birthplace_state, p.birthplace_country, birth_place
+GROUP BY p.team_id, p.first_name, p.last_name, p.birthplace_city, p.birthplace_state, p.birthplace_country
 ORDER BY first_name, last_name
 ```
 As you can see, I collected all the important characteristic fields and summed up the stats in accordance with player-level
@@ -136,7 +136,7 @@ JOIN
     ON t.id=p.team_id
 WHERE birth_place != "" AND season = 2017
 GROUP BY t.conf_name, t.market, school_city,
-         p.team_id, p.first_name, p.last_name, p.birthplace_city, p.birthplace_state, p.birthplace_country, birth_place
+         p.team_id, p.first_name, p.last_name, p.birthplace_city, p.birthplace_state, p.birthplace_country
 ORDER BY first_name, last_name
 ```
 
@@ -254,7 +254,7 @@ JOIN
 WHERE birth_place != "" AND season = 2017
 GROUP BY t.conf_name, t.market, school_city, first_name, p.last_name,
          p.birthplace_city, p.birthplace_state, p.birthplace_country,
-         birth_place, g.team_games_played_2017
+         g.team_games_played_2017
 HAVING attendance >= .75 AND avg_mins_per_game >= 20
 ORDER BY first_name, last_name
 ```
