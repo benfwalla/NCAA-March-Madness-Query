@@ -1,5 +1,12 @@
 # NCAA March Madness Query
 
+## TL;DR
+- I used [Google’s NCAA Basketball Database](https://console.cloud.google.com/marketplace/details/ncaa-bb-public/ncaa-basketball)
+to answer a seemingly simple question: *who are the best players from each country?*
+- With the help of SQL and Python, I queried and calculated insights from the database
+- I created [this Dashboard in Google Data Studio](https://datastudio.google.com/s/jAmFXmtW6nc) to visualize my work!
+
+## Intro
 Because I’m a huge college basketball fan, I wanted to play around with [Google’s NCAA Basketball Database](https://console.cloud.google.com/marketplace/details/ncaa-bb-public/ncaa-basketball)
 that is located on Google Cloud’s Big Query Platform. The database includes stats about games, team, and players that date 
 back all the way to 1894! Since the 2020 March Madness Tournament is cancelled due to COVID-19, I created this personal
@@ -17,7 +24,7 @@ of my three queries. My journey of the other two queries can be found in
 The first thing I do when I'm asked to write a query is evaluate exactly what is being asked. So, let's analyze this 
 question and underline the most important keywords:
 
-*Who are the __**best**__ __**players**__ from each __**country**__ in the 2017 season?*
+*Who are the __**best**__ __**players**__ from each __**country**__ in the __**2017**__ season?*
 
 Okay- let's evaluate the nouns in this sentence. "Players" and "Country" are pretty straightforward characteristics. I'm
 being told to write a query that outputs a table of 2017 player names with their associated countries of birth. I also think
